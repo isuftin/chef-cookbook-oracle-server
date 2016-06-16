@@ -14,3 +14,5 @@ package 'libstdc++-devel'
 package 'gcc-c++'
 
 package 'libaio-devel'
+
+package 'unzip'

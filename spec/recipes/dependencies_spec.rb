@@ -22,4 +22,8 @@ describe 'owi-oracle-server::dependencies' do
   it 'installs the libaio-devel package' do
     expect(chef_run).to install_package('libaio-devel')
   end
+
+  it 'installs the unzip package' do
+    expect(chef_run).to install_package('unzip')
+  end
 end
