@@ -1,0 +1,26 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: centos-6.7-vbox
+    driver:
+      box: bento/centos-6.7
+      box_url: bento/centos-6.7
+      provider: virtualbox
+  - name: centos-6.7-vmware
+    driver:
+      box: bento/centos-6.7
+      box_url: bento/centos-6.7
+      provider: vmware_fusion
+
+suites:
+  - name: default
+    run_list:
+      - recipe[owi-oracle-server]
+    attributes: {
+    }
+    
