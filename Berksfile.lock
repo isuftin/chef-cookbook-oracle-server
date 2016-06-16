@@ -1,0 +1,7 @@
+DEPENDENCIES
+  owi-oracle-server
+    path: .
+    metadata: true
+
+GRAPH
+  owi-oracle-server (0.0.1)
