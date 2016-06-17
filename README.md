@@ -1,18 +1,14 @@
-# owi-oracle-server Cookbook
+# OWI Oracle Server Cookbook
 
-TODO: Enter the cookbook description here.
-
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+This cookbook is used to set up an Oracle database server on a CentOS 6.x machine
 
 ## Requirements
 
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
 
-e.g.
+
 ### Platforms
 
-- SandwichOS
+- CentOS 6.x
 
 ### Chef
 
@@ -20,37 +16,24 @@ e.g.
 
 ### Cookbooks
 
-- `toaster` - owi-oracle-server needs toaster to brown your bagel.
 
 ## Attributes
 
-TODO: List your cookbook attributes here.
-
-e.g.
-### owi-oracle-server::default
-
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['owi-oracle-server']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+`['owi-oracle-server']['config']['data_bag']['name']` = The name of the encrypted databag which holds the admin password
+`['owi-oracle-server']['config']['data_bag']['item']['credentials']` = The name of the data bag item holding the admin password 
+`['owi-oracle-server']['config']['oracle_user']` = Service user account created on the system 
+`['owi-oracle-server']['config']['oracle_group']` = Service user account group created on the system
+`['owi-oracle-server']['config']['oracle_sid']` = Database SID to create
+`['owi-oracle-server']['config']['oracle_home']` = Home directory of the service account
+`['owi-oracle-server']['config']['oracle_base']` = Application directory, typically in the home directory of the service account
+`['owi-oracle-server']['config']['db_domain']` = ?
+`['owi-oracle-server']['config']['memory_target']` = Configuration option
+`['owi-oracle-server']['config']['install_location']` = Source location of the installation file zip
 
 ## Usage
 
 ### owi-oracle-server::default
 
-TODO: Write usage instructions for each cookbook.
-
-e.g.
 Just include `owi-oracle-server` in your node's `run_list`:
 
 ```json
@@ -64,9 +47,6 @@ Just include `owi-oracle-server` in your node's `run_list`:
 
 ## Contributing
 
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
 3. Write your change
@@ -76,5 +56,7 @@ e.g.
 
 ## License and Authors
 
-Authors: TODO: List authors
+License: Public Domain
+
+Authors: Ivan Suftin <isuftin@usgs.gov>
 
