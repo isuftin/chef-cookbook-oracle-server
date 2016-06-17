@@ -16,3 +16,7 @@ package 'gcc-c++'
 package 'libaio-devel'
 
 package 'unzip'
+
+package 'sysstat'
+
+package 'ksh'

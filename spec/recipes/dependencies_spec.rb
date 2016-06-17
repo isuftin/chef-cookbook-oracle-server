@@ -26,4 +26,12 @@ describe 'owi-oracle-server::dependencies' do
   it 'installs the unzip package' do
     expect(chef_run).to install_package('unzip')
   end
+
+  it 'installs the sysstat package' do
+    expect(chef_run).to install_package('sysstat')
+  end
+
+  it 'installs the ksh package' do
+    expect(chef_run).to install_package('ksh')
+  end
 end

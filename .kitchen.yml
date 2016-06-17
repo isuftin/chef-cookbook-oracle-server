@@ -2,6 +2,7 @@
 driver:
   name: vagrant
 
+
 provisioner:
   name: chef_zero
 
@@ -11,18 +12,41 @@ platforms:
       box: bento/centos-6.7
       box_url: bento/centos-6.7
       provider: virtualbox
+      customize:
+        memory: 6144
   - name: centos-6.7-vmware
     driver:
       box: bento/centos-6.7
       box_url: bento/centos-6.7
       provider: vmware_fusion
+      customize:
+        memory: 6144
 
 suites:
   - name: default
     run_list:
+      - recipe[sysctl::apply]
       - recipe[owi-oracle-server]
+    data_path: './test/fixtures/files/'
     data_bags_path: './test/integration/default/data_bags/'
     encrypted_data_bag_secret_key_path: './test/integration/default/encrypted_data_bag_secret'
     attributes: {
+      'sysctl' : {
+        'params' : {
+          'net.core.wmem_max' : '1048576',
+          'net.core.wmem_default' : '262144',
+          'net.core.rmem_max' : '4194304',
+          'net.core.rmem_default' : '262144',
+          'net.ipv4.ip_local_port_range' : '9000 65535',
+          'fs.filemax' : '6815744',
+          'fs.aio-max-nr' : '1048576',
+          'kernel.semmsl' : '250',
+          'kernel.semmns' : '32000',
+          'kernel.semopm' : '100',
+          'kernel.semmni' : '128',
+          'kernel.shmmni' : '4096',
+          'kernel.panic_on_oops' : '1'
+        }
+      }
     }
     
