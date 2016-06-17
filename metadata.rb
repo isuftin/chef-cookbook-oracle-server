@@ -9,3 +9,5 @@ version          '0.0.1'
 
 source_url 'https://github.com/USGS-CIDA/chef-cookbook-oracle-server' if respond_to?(:source_url)
 issues_url 'https://github.com/USGS-CIDA/chef-cookbook-oracle-server/issues' if respond_to?(:issues_url)
+
+depends 'sysctl'

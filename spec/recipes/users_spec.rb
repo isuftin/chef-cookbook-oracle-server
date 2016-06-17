@@ -8,7 +8,11 @@ describe 'owi-oracle-server::users' do
   end
 
   it 'creates a group named `oinstall`' do
-    expect(chef_run).to create_group('oinstall').with(members: ['oracle'])
+    expect(chef_run).to create_group('oinstall')
+  end
+
+  it 'creates a group named `dba` and adds the oracle user to it' do
+    expect(chef_run).to create_group('dba')
   end
 
   it 'creates a directory named `/home/oracle`' do

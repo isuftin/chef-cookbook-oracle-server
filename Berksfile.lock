@@ -2,6 +2,11 @@ DEPENDENCIES
   owi-oracle-server
     path: .
     metadata: true
+  sysctl (~> 0.7.5)
 
 GRAPH
+  ohai (3.0.1)
   owi-oracle-server (0.0.1)
+    sysctl (>= 0.0.0)
+  sysctl (0.7.5)
+    ohai (~> 3.0)
