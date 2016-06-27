@@ -1,0 +1,80 @@
+startup nomount
+
+create database <%= @oracle_sid %>
+   user sys identified by <%= @system_password %>
+   user system identified by <%= @system_password %>
+   logfile group 1 ('<%= @oracle_base %>/oradata/<%= @oracle_sid %>/redo01a.log',
+                    '<%= @oracle_base %>/oradata/<%= @oracle_sid %>/redo01b.log') size 1G blocksize 512,
+           group 2 ('<%= @oracle_base %>/oradata/<%= @oracle_sid %>/redo02a.log',
+                    '<%= @oracle_base %>/oradata/<%= @oracle_sid %>/redo02b.log') size 1G blocksize 512
+   MAXLOGFILES 10
+   MAXLOGMEMBERS 3
+   MAXLOGHISTORY 10
+   MAXDATAFILES 512
+   NOARCHIVELOG
+   CHARACTER SET AL32UTF8
+   EXTENT MANAGEMENT LOCAL
+   DATAFILE '<%= @oracle_base %>/oradata/<%= @oracle_sid %>/system.dbf' SIZE 2G
+      AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED
+   SYSAUX DATAFILE '<%= @oracle_base %>/oradata/<%= @oracle_sid %>/sysaux.dbf' SIZE 2G
+      AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED
+   DEFAULT TABLESPACE users
+      DATAFILE '<%= @oracle_base %>/oradata/<%= @oracle_sid %>/users.dbf' SIZE 2G
+         AUTOEXTEND ON MAXSIZE UNLIMITED
+      segment space management auto
+   DEFAULT TEMPORARY TABLESPACE temp
+      TEMPFILE '<%= @oracle_base %>/oradata/<%= @oracle_sid %>/temp.dbf' SIZE 20G
+   UNDO TABLESPACE undotbs1
+      DATAFILE '<%= @oracle_base %>/oradata/<%= @oracle_sid %>/undotbs1.dbf' SIZE 8G
+      AUTOEXTEND ON NEXT 1G MAXSIZE UNLIMITED;
+
+prompt !+! done with create !+!
+@<%= @oracle_home %>/rdbms/admin/catalog
+prompt !+! done with catalog !+!
+@<%= @oracle_home %>/rdbms/admin/catproc
+prompt !+! done with catproc !+!
+
+@<%= @oracle_home %>/javavm/install/initjvm
+prompt !+! done with initjvm !+!
+@<%= @oracle_home %>/xdk/admin/initxml
+prompt !+! done with initxml !+!
+@<%= @oracle_home %>/xdk/admin/xmlja
+prompt !+! done with xmlja !+!
+@<%= @oracle_home %>/rdbms/admin/catjava
+prompt !+! done with catjava !+!
+@<%= @oracle_home %>/rdbms/admin/catexf
+prompt !+! done with catexf !+!
+
+@<%= @oracle_home %>/rdbms/admin/catqm XDB SYSAUX TEMP NO
+prompt !+! done with catqm !+!
+
+rem @<%= @oracle_home %>/ctx/admin/catctx <%= @system_pass %> sysaux temp lock
+rem @<%= @oracle_home %>/ctx/admin/defaults/drdefus
+rem grant execute on ctxsys.ctx_ddl to public;
+rem prompt !+! done with catctx !+!
+
+@<%= @oracle_home %>/ord/admin/ordinst SYSAUX SYSAUX
+prompt !+! done with ordinst !+!
+
+@<%= @oracle_home %>/ord/im/admin/iminst
+prompt !+! done with iminst !+!
+
+@<%= @oracle_home %>/rdbms/admin/dminst SYSAUX TEMP
+prompt !+! done with dminst !+!
+
+@<%= @oracle_home %>/rdbms/admin/owminst.plb
+prompt !+! done with owminst.plb !+!
+
+@<%= @oracle_home %>/rdbms/admin/utlvalid
+@<%= @oracle_home %>/rdbms/admin/utlchn1
+
+connect system/<%= @system_password %>
+@<%= @oracle_home %>/rdbms/admin/catdbsyn
+@<%= @oracle_home %>/sqlplus/admin/pupbld
+
+connect / as sysdba
+rem @tablespaces
+shutdown
+startup
+
+exit

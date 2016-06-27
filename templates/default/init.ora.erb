@@ -49,13 +49,13 @@
 db_name=<%= @oracle_sid %>
 memory_target=<%= @memory_target %>
 processes = 150
-audit_file_dest='<%= @oracle_base %>/admin/<%= @oracle_sid %>/adump'
+audit_file_dest='<%= @oracle_base %>/oradata/<%= @oracle_sid %>/adump'
 audit_trail ='db'
 db_block_size=8192
 db_domain='<%= @db_domain %>'
-#db_recovery_file_dest='<%= @oracle_base %>/fast_recovery_area'
+#db_recovery_file_dest='<%= @oracle_base %>/oradata/<%= @oracle_sid %>/fast_recovery_area'
 #db_recovery_file_dest_size=2G
-diagnostic_dest='/usr/oracle/app/oracle'
+diagnostic_dest='<%= @oracle_base %>/diag/rdbms'
 dispatchers='(PROTOCOL=TCP) (SERVICE=<%= @oracle_sid.upcase %>XDB)'
 open_cursors=300 
 remote_login_passwordfile='EXCLUSIVE'
@@ -64,7 +64,7 @@ undo_tablespace='UNDOTBS1'
 # devices
 compatible=12.1.0
 control_files= ( <%= @oracle_base %>/oradata/<%= @oracle_sid %>/control01.dbf )
-log_archive_dest_1='location=<%= @oracle_base %>/oradata/<%= @oracle_sid %>/archive mandatory\
+log_archive_dest_1='location=<%= @oracle_base %>/oradata/<%= @oracle_sid %>/archive mandatory'
 pga_aggregate_limit=0
 smtp_out_server='localhost:25'
 _cursor_bind_capture_interval = 1
