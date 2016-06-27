@@ -1,0 +1,16 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+# User specific aliases and functions
+
+export HOME=<%= @oracle_user_home %>
+export USER=<%= @oracle_user %>
+export ORACLE_HOME=<%= @oracle_home %>
+export ORACLE_BASE=<%= @oracle_base %>
+export ORACLE_SID=<%= @oracle_sid %>
+export SYSPASS=<%= @system_password %>
+export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$ORACLE_HOME/bin

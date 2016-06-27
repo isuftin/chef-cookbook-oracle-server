@@ -26,7 +26,7 @@ This cookbook is used to set up an Oracle database server on a CentOS 6.x machin
 `['owi-oracle-server']['config']['oracle_sid']` = Database SID to create
 `['owi-oracle-server']['config']['oracle_home']` = Home directory of the service account
 `['owi-oracle-server']['config']['oracle_base']` = Application directory, typically in the home directory of the service account
-`['owi-oracle-server']['config']['db_domain']` = ?
+`['owi-oracle-server']['config']['db_domain']` = TODO: Get info on this parameter
 `['owi-oracle-server']['config']['memory_target']` = Configuration option
 `['owi-oracle-server']['config']['install_location']` = Source location of the installation file zip
 
