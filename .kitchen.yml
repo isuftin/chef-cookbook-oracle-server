@@ -36,7 +36,7 @@ platforms:
       provider: virtualbox
       customize:
         memory: 6144
-  - name: centos-6.7-vbox-sftp-transport
+  - name: centos-6.7-vmware-sftp-transport
     transport:
       name: sftp
     driver:

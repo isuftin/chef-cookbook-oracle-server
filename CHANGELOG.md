@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the owi-oracle-server cookbook.
 
+## 0.0.3
+- [isuftin@usgs.gov] - Updated the README to reflect current state of cookbook
+- [isuftin@usgs.gov] - Updated test coverage for Serverspec and Chefspec
+
 ## 0.0.2
 - [isuftin@usgs.gov] - Fixed a copy flag which broke under certain circumstances
 - [isuftin@usgs.gov] - Added start/stop scripting as well as fixed up installation issues
