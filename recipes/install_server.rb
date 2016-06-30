@@ -15,8 +15,13 @@ oracle_user = node['owi-oracle-server']['config']['oracle_user']
 oracle_group = node['owi-oracle-server']['config']['oracle_group']
 oracle_home = node['owi-oracle-server']['config']['oracle_home']
 oracle_base = node['owi-oracle-server']['config']['oracle_base']
+oracle_global_dbname = node['owi-oracle-server']['config']['oracle_global_dbname']
 db_domain = node['owi-oracle-server']['config']['db_domain']
 memory_target = node['owi-oracle-server']['config']['memory_target']
+
+if db_domain.nil? || db_domain.empty?
+  db_domain = node["domain"]
+end
 
 
 directory oracle_base do
@@ -36,6 +41,8 @@ end
 template "#{oracle_user_home}/local_response.rsp" do
   source 'local_response.rsp.erb'
   variables ({
+               :oracle_sid => oracle_sid,
+               :db_domain => db_domain,
                :hostname => node['hostname'],
                :oracle_base => oracle_base,
                :oracle_home => oracle_home,
@@ -127,7 +134,7 @@ end
 bash 'post_install' do
   code <<-EOF
   source #{oracle_user_home}/.bash_profile && \
-  cp #{oracle_home}/javavm/jdk/jdk6/lib/libjavavm12.a #{oracle_home}/lib/ && \
+  ln -sf  #{oracle_home}/javavm/jdk/jdk6/lib/libjavavm12.a #{oracle_home}/lib/ && \
   cd #{oracle_home}/rdbms/lib && \
   make -f ins_rdbms.mk install && \
     mv config.o config.o.bad && \
@@ -135,7 +142,7 @@ bash 'post_install' do
     make -f ins_net_server.mk install && \
     make -f ins_net_client.mk install && \
     cd #{oracle_home}/javavm/admin && \
-    ln -s ../jdk/jdk6/admin/classes.bin . && \
+    ln -sf #{oracle_home}/javavm/jdk/jdk6/admin/classes.bin #{oracle_home}/javavm/admin/ && \
     cd #{oracle_home}/bin && \
     relink as_installed && \
     relink all
