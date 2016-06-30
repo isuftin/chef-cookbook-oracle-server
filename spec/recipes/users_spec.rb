@@ -2,6 +2,9 @@ require_relative '../spec_helper'
 
 oracle_home = '/u01/oradata/auto/app/oracle/product/12.1.0/dbhome_1'
 oracle_base = '/u01/oradata/auto'
+oracle_user_home = '/home/oracle'
+oracle_user = 'oracle'
+oracle_group = 'oinstall'
 
 describe 'owi-oracle-server::users' do
   let(:chef_run) {
@@ -21,8 +24,8 @@ describe 'owi-oracle-server::users' do
                                             'credentials'=> 'credentials'
                                           }
                                         },
-                                        'oracle_user'=> 'oracle',
-                                        'oracle_group'=> 'oinstall',
+                                        'oracle_user'=> oracle_user,
+                                        'oracle_group'=> oracle_group,
                                         'oracle_sid'=> 'admin',
                                         'oracle_base'=> oracle_base,
                                         'oracle_home'=> oracle_home,
@@ -37,11 +40,11 @@ describe 'owi-oracle-server::users' do
   }
 
   it 'creates a user named `oracle`' do
-    expect(chef_run).to create_user('oracle')
+    expect(chef_run).to create_user(oracle_user)
   end
 
   it 'creates a group named `oinstall`' do
-    expect(chef_run).to create_group('oinstall')
+    expect(chef_run).to create_group(oracle_group)
   end
 
   it 'creates a group named `dba` and adds the oracle user to it' do
@@ -49,13 +52,13 @@ describe 'owi-oracle-server::users' do
   end
 
   it 'creates a directory named `/home/oracle`' do
-    expect(chef_run).to create_directory('/home/oracle').with(
+    expect(chef_run).to create_directory(oracle_user_home).with(
       user:   'oracle',
       group:  'oinstall'
     )
   end
 
   it 'creates a bash profile file' do
-    expect(chef_run).to create_template('/home/oracle/.bash_profile')
+    expect(chef_run).to create_template("#{oracle_user_home}/.bash_profile")
   end
 end
