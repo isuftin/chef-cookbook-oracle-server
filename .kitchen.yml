@@ -21,6 +21,30 @@ platforms:
       provider: vmware_fusion
       customize:
         memory: 6144
+  # Note: SFTP transport requires the installation of the kitchen-sync gem
+  # https://github.com/coderanger/kitchen-sync
+  # Run: chef gem install kitchen-sync
+  # This allows the very large installation zip to be transferred to the VM the 
+  # first time Test Kitchen is run, but not subsequent runs as long as the file
+  # has not changed. This speeds up testing dramatically.
+  - name: centos-6.7-vbox-sftp-transport
+    transport:
+      name: sftp
+    driver:
+      box: bento/centos-6.7
+      box_url: bento/centos-6.7
+      provider: virtualbox
+      customize:
+        memory: 6144
+  - name: centos-6.7-vbox-sftp-transport
+    transport:
+      name: sftp
+    driver:
+      box: bento/centos-6.7
+      box_url: bento/centos-6.7
+      provider: vmware_fusion
+      customize:
+        memory: 6144
 
 suites:
   - name: default
