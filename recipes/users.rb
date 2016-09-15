@@ -29,6 +29,15 @@ group 'dba' do
   append true
 end
 
+# https://tickets.opscode.com/browse/CHEF-4976
+execute "#{oracle_user}: disable password expiration" do
+  command "chage -M 99999 '#{oracle_user}'"
+  only_if do
+    require 'shadow'
+    Shadow::Passwd.getspnam(oracle_user).sp_max != 99999
+  end
+end
+
 template "#{oracle_user_home}/.bash_profile" do
   source "oracle_bash_profile.erb"
   user oracle_user

@@ -6,11 +6,12 @@ require 'spec_helper.rb'
   end
 end
 
-
 describe user('oracle') do
   it { should exist }
   it { should belong_to_group 'oinstall' }
   it { should belong_to_group 'dba' }
+  its(:minimum_days_between_password_change) { should eq 0 }
+  its(:maximum_days_between_password_change) { should eq 99999 }
 end
 
 describe file('/home/oracle') do

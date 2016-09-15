@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version of the owi-oracle-server cookbook.
 
+## 0.0.5
+- [isuftin@usgs.gov] - No longer expiring the oracle account
+
 ## 0.0.4
 - [isuftin@usgs.gov] - Switched Oracle user from being a system account to allow AD login
 
