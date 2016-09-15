@@ -20,7 +20,6 @@ group oracle_group do
 end
 
 user oracle_user do
-  system true
   group oracle_group
   manage_home true
 end
@@ -30,11 +29,14 @@ group 'dba' do
   append true
 end
 
-directory '/home/oracle' do
-  owner oracle_user
-  group oracle_group
+# https://tickets.opscode.com/browse/CHEF-4976
+execute "#{oracle_user}: disable password expiration" do
+  command "chage -M 99999 '#{oracle_user}'"
+  only_if do
+    require 'shadow'
+    Shadow::Passwd.getspnam(oracle_user).sp_max != 99999
+  end
 end
-
 
 template "#{oracle_user_home}/.bash_profile" do
   source "oracle_bash_profile.erb"

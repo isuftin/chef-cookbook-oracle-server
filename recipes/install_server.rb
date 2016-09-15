@@ -128,6 +128,7 @@ bash 'run_installer' do
   notifies :run, "bash[post_install]", :immediately
   notifies :run, "bash[post_install_as_root]", :immediately
   notifies :run, "bash[run_sql]", :delayed
+  timeout 7200
   action :nothing
 end
 
@@ -182,5 +183,6 @@ bash "run_sql" do
   })
   user oracle_user
   group oracle_group
+  timeout 7200
   action :nothing
 end
