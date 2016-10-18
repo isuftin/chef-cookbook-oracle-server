@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version of the owi-oracle-server cookbook.
 
+## 0.0.6
+- [isuftin@usgs.gov] - Fix directory permissions for Oracle base
+
 ## 0.0.5
 - [isuftin@usgs.gov] - No longer expiring the oracle account
 
