@@ -114,8 +114,8 @@ end
 end
 
 bash 'Update oracle base dir permissions' do
-  code "chown #{oracle_user}:#{oracle_group} -R #{oracle_base.split('/')[1]}"
-  not_if "stat -c %U #{oracle_base.split('/')[1]} | grep #{oracle_user}"
+  code "chown #{oracle_user}:#{oracle_group} -R /#{oracle_base.split('/')[1]}"
+  not_if "stat -c %U /#{oracle_base.split('/')[1]} | grep #{oracle_user}"
 end
 
 
