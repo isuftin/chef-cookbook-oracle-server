@@ -29,6 +29,7 @@ directory oracle_base do
   group oracle_group
   mode '0775'
   recursive true
+  notifies :run, 'execute[update_dir_permissions]', :immediately
 end
 
 directory oracle_home do
@@ -36,6 +37,7 @@ directory oracle_home do
   group oracle_group
   mode '0775'
   recursive true
+  notifies :run, 'execute[update_dir_permissions]', :immediately
 end
 
 template "#{oracle_user_home}/local_response.rsp" do
@@ -109,15 +111,15 @@ end
   directory "#{oracle_base}/oradata/#{oracle_sid}/#{d}" do
     owner oracle_user
     group oracle_group
+    notifies :run, 'execute[update_dir_permissions]', :immediately
     recursive true
   end
 end
 
-bash 'Update oracle base dir permissions' do
-  code "chown #{oracle_user}:#{oracle_group} -R /#{oracle_base.split('/')[1]}"
-  not_if "stat -c %U /#{oracle_base.split('/')[1]} | grep #{oracle_user}"
+execute 'update_dir_permissions' do
+  command "chown #{oracle_user}:#{oracle_group} -R /#{oracle_base.split('/')[1]}"
+  action :nothing
 end
-
 
 bash 'run_installer' do
   cwd "#{oracle_user_home}/database"
@@ -134,7 +136,7 @@ bash 'run_installer' do
   notifies :run, "bash[post_install]", :immediately
   notifies :run, "bash[post_install_as_root]", :immediately
   notifies :run, "bash[run_sql]", :delayed
-  timeout 7200
+  timeout 9600
   action :nothing
 end
 
