@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version of the owi-oracle-server cookbook.
 
+## 0.0.7
+- [isuftin@usgs.gov] - Making sure execute block fires
+
 ## 0.0.6
 - [isuftin@usgs.gov] - Fix directory permissions for Oracle base
 
