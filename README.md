@@ -26,7 +26,7 @@ The Oracle server installation file from Oracle. This is not freely available an
 
 `["owi-oracle-server"]["config"]["data_bag"]["name"]` = The name of the encrypted databag which holds the admin password
 
-`["owi-oracle-server"]["config"]["data_bag"]["item"]["credentials"]` = The name of the data bag item holding the admin password 
+`["owi-oracle-server"]["config"]["data_bag"]["item"]["credentials"]` = The name of the data bag item holding the admin password
 
 `["owi-oracle-server"]["config"]["oracle_user"]` = Service user account created on the system (Default: oracle)
 
@@ -43,6 +43,11 @@ The Oracle server installation file from Oracle. This is not freely available an
 `["owi-oracle-server"]["config"]["memory_target"]` = Configuration option. Read [more info here](https://docs.oracle.com/cd/B28359_01/server.111/b28310/memory003.htm) (Default: 2G)
 
 `["owi-oracle-server"]["config"]["install_location"]` = Source location of the installation file zip (Default: file:///tmp/kitchen/data/install.zip - This is where Test Kitchen places it)
+
+`["owi-oracle-server"]["config"]["basic_client_install_location"]` = Source location of the installation RPM file for the basic client install. This is used by the client_install recipe
+`["owi-oracle-server"]["config"]["sqlplus_client_install_location"]` = Source location of the installation RPM file for the SQLPlus client install. This is used by the client_install recipe
+`["owi-oracle-server"]["config"]["jdbc_client_install_location"]` = Source location of the installation RPM file for the JDBC supplemental libraries. This is used by the client_install recipe
+`["owi-oracle-server"]["config"]["ld_library_path"]` = Sets the path to the link libraries needed by the SQLPlus client. Default value is '/usr/lib/oracle/12.1/client64/lib' which is valid for 12.1 client installs. If installing a different version, this will need to be changed. If not running the client_install_recipe, this can be left as an empty string
 
 ## Usage
 
@@ -97,4 +102,3 @@ You will also want to add sysctl-specific settings in your attributes. This is r
 License: Public Domain
 
 Authors: Ivan Suftin <isuftin@usgs.gov>
-

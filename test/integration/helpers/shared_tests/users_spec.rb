@@ -28,3 +28,11 @@ describe file('/home/oracle/.bash_profile') do
   it { should be_grouped_into 'oinstall' }
   it { should be_mode 744 }
 end
+
+describe file('/home/oracle/.bashrc') do
+  it { should exist }
+  it { should be_file }
+  it { should be_owned_by 'oracle' }
+  it { should be_grouped_into 'oinstall' }
+  it { should be_mode 744 }
+end

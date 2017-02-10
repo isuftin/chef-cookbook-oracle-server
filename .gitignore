@@ -2,3 +2,4 @@
 .kitchen.local.yml
 test/fixtures/
 Berksfile.lock
+.DS_Store
