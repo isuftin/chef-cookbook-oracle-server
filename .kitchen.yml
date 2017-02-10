@@ -7,41 +7,41 @@ provisioner:
   name: chef_zero
 
 platforms:
-  - name: centos-6.7-vbox
+  - name: centos-6.8-vbox
     driver:
-      box: bento/centos-6.7
-      box_url: bento/centos-6.7
+      box: bento/centos-6.8
+      box_url: bento/centos-6.8
       provider: virtualbox
       customize:
         memory: 6144
-  - name: centos-6.7-vmware
+  - name: centos-6.8-vmware
     driver:
-      box: bento/centos-6.7
-      box_url: bento/centos-6.7
+      box: bento/centos-6.8
+      box_url: bento/centos-6.8
       provider: vmware_fusion
       customize:
         memory: 6144
   # Note: SFTP transport requires the installation of the kitchen-sync gem
   # https://github.com/coderanger/kitchen-sync
   # Run: chef gem install kitchen-sync
-  # This allows the very large installation zip to be transferred to the VM the 
+  # This allows the very large installation zip to be transferred to the VM the
   # first time Test Kitchen is run, but not subsequent runs as long as the file
   # has not changed. This speeds up testing dramatically.
-  - name: centos-6.7-vbox-sftp-transport
+  - name: centos-6.8-vbox-sftp-transport
     transport:
       name: sftp
     driver:
-      box: bento/centos-6.7
-      box_url: bento/centos-6.7
+      box: bento/centos-6.8
+      box_url: bento/centos-6.8
       provider: virtualbox
       customize:
         memory: 6144
-  - name: centos-6.7-vmware-sftp-transport
+  - name: centos-6.8-vmware-sftp-transport
     transport:
       name: sftp
     driver:
-      box: bento/centos-6.7
-      box_url: bento/centos-6.7
+      box: bento/centos-6.8
+      box_url: bento/centos-6.8
       provider: vmware_fusion
       customize:
         memory: 6144
@@ -100,4 +100,9 @@ suites:
         }
       }
     }
-    
+
+  - name: client
+    run_list:
+      - recipe[owi-oracle-server::users]
+      - recipe[owi-oracle-server::install_client]
+    data_path: './test/fixtures/files/'

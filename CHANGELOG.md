@@ -1,6 +1,9 @@
 # OWI Oracle Server CHANGELOG
 
-This file is used to list changes made in each version of the owi-oracle-server cookbook.
+## 0.0.8
+- [isuftin@usgs.gov] - Rubocop fixes
+- [isuftin@usgs.gov] - Created a recipe that installs only the Oracle client
+- [isuftin@usgs.gov] - Updated Kitchen to use CentOS 6.8
 
 ## 0.0.7
 - [isuftin@usgs.gov] - Making sure execute block fires
