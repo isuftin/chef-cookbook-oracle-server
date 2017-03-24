@@ -15,7 +15,6 @@ oracle_user = node['owi-oracle-server']['config']['oracle_user']
 oracle_group = node['owi-oracle-server']['config']['oracle_group']
 oracle_home = node['owi-oracle-server']['config']['oracle_home']
 oracle_base = node['owi-oracle-server']['config']['oracle_base']
-oracle_global_dbname = node['owi-oracle-server']['config']['oracle_global_dbname']
 db_domain = node['owi-oracle-server']['config']['db_domain']
 memory_target = node['owi-oracle-server']['config']['memory_target']
 
