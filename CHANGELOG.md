@@ -1,5 +1,9 @@
 # OWI Oracle Server CHANGELOG
 
+## 0.0.9
+- [isuftin@usgs.gov] - Add recipe to update the /etc/default/useradd file
+- [isuftin@usgs.gov] - Add recipe to mount an external filesystem
+
 ## 0.0.8
 - [isuftin@usgs.gov] - Rubocop fixes
 - [isuftin@usgs.gov] - Created a recipe that installs only the Oracle client
